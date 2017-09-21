@@ -13,9 +13,9 @@ The developper should first create (JUnit) classes :
 - Many different @Story can be defined on the same class or method (if strongly connected for exemple)
 - Test classes should have a nice functionnal name since the class name is used to generate documentation titles.
 
-#Usage
+# Usage
 Build with mvn install
 Run GenerateRun.java in the src/test/java directory to build the output.html file
 
-#Things to do
+# Things to do
 - Give a way (optional?) to index stories according to some external, client relative specifications id.
