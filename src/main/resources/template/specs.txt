@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>{title}</title>
+
+<style>
+.story {
+    margin-bottom: .5cm;
+    border: 1px solid gray;
+    width: 20cm;
+    padding: .25cm .1cm .5cm .5cm;
+    margin-left: 1cm;
+}
+
+.why::after, .who::after { content:","}
+.what::after { content:"."}
+.who, .what {
+    margin-left: .5cm;
+}
+.test {
+   float: right;
+}
+
+</style>
+
+</head>
+
+
+<body>
+<h1>{title}</h1>
+
+{stories}
+
+{blocks}
+</body>
+
+</html>
