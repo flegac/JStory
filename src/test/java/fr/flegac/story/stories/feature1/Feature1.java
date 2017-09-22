@@ -1,4 +1,4 @@
-package fr.flegac.story.stories;
+package fr.flegac.story.stories.feature1;
 
 import fr.flegac.story.Story;
 import fr.flegac.story.TestScenario;
@@ -12,6 +12,6 @@ import fr.flegac.story.TestScenario;
   "enter user/password",
   "click ok"
 })
-public class AdminTest {
+public class Feature1 {
 
 }

@@ -1,28 +1,27 @@
 package fr.flegac.story.publisher.generator.story;
 
 import java.lang.reflect.Method;
+import java.util.LinkedList;
+import java.util.List;
 import fr.flegac.story.Story;
 
 public class StoryDTO {
   public Story story;
   public String test;
 
-  public StoryDTO(final Story story, final Class<?> klass) {
+  public StoryDTO(final Story story, final Class<?> testClass) {
     super();
     this.story = story;
-    this.test = klass.getSimpleName() + ".class";
+    this.test = testClass.getSimpleName() + ".class";
   }
 
-  public StoryDTO(final Story story, final Method method) {
+  public StoryDTO(final Story story, final Method testMethod) {
     super();
     this.story = story;
-    this.test = method.getDeclaringClass().getSimpleName() + "." + method.getName() + "()";
+    this.test = testMethod.getDeclaringClass().getSimpleName() + "." + testMethod.getName() + "()";
   }
 
-  public StoryDTO(final Story story, final String test) {
-    super();
-    this.story = story;
-    this.test = test;
+  public List<String> scenario() {
+    return new LinkedList<>();
   }
-
 }

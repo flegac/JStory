@@ -18,6 +18,9 @@ public class StoryGenerator extends Generator<StoryDTO> {
     config("what", input.story.what());
     config("why", input.story.why());
     config("test", input.test);
+
+    config("scenario", input.scenario());
+
   }
 
 }

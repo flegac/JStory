@@ -17,5 +17,4 @@ public @interface Story {
   String who();
 
   String why();
-
 }
