@@ -16,7 +16,9 @@ The developper should first create (JUnit) classes :
 # Usage
 Build with mvn install
 Run PubliserTest.java as a JUnit test.
+
 This will build a documentation website covering the JStory project itself.
+
 Note: You (maybe) need to configure the input/target folder in PublisherTest.java.
 
 # Things to do
