@@ -15,7 +15,10 @@ The developper should first create (JUnit) classes :
 
 # Usage
 Build with mvn install
-Run GenerateRun.java in the src/test/java directory to build the output.html file
+Run PubliserTest.java as a JUnit test.
+This will build a documentation website covering the JStory project itself.
+Note: You (maybe) need to configure the input/target folder in PublisherTest.java.
 
 # Things to do
 - Give a way (optional?) to index stories according to some external, client relative specifications id.
+- Give a way to represent non automated tests for further generation (user interface test for exemple).
