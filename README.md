@@ -14,8 +14,7 @@ The developper should first create (JUnit) classes :
 - Test classes should have a nice functionnal name since the class name is used to generate documentation titles.
 
 # Usage
-Build with mvn install
-Run PubliserTest.java as a JUnit test.
+Build with mvn install, then run PubliserTest.java as a JUnit test.
 
 This will build a documentation website covering the JStory project itself.
 
