@@ -1,28 +1,10 @@
 package fr.flegac.story.publisher;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Scanner;
 
 public class Utils {
-  public static String cleanup(final String s) {
-    return s.trim().replaceAll("\\s+", " ");
-  }
-
-  public static String convertPathToString(final Path path) {
-    try (final FileInputStream is = new FileInputStream(path.toFile());
-        Scanner scanner = new Scanner(is);) {
-      try (final Scanner s = scanner.useDelimiter("\\A");) {
-        return s.hasNext() ? s.next() : "";
-      }
-    } catch (final IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
   public static void copyFolder(final Path src, final Path dest) {
     try {
       Files.walk(src)

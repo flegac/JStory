@@ -1,23 +1,32 @@
-package fr.flegac.story.publisher.generator.section;
+package fr.flegac.story.publisher.model;
 
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 import fr.flegac.story.Story;
 import fr.flegac.story.publisher.Utils;
-import fr.flegac.story.publisher.generator.story.StoryDTO;
 
 public class SectionDTO {
-  public Class<?> klass;
+
+  private final String title;
+
+  private final List<StoryDTO> stories = new LinkedList<>();
 
   public SectionDTO(final Class<?> klass) {
     super();
-    this.klass = klass;
+    this.title = Utils.splitCamelCase(klass.getSimpleName());
+    computeStories(klass);
   }
 
-  public List<StoryDTO> stories() {
-    final List<StoryDTO> stories = new LinkedList<>();
+  public List<StoryDTO> getStories() {
+    return stories;
+  }
 
+  public String getTitle() {
+    return title;
+  }
+
+  private void computeStories(final Class<?> klass) {
     for (final Story story : klass.getAnnotationsByType(Story.class)) {
       stories.add(new StoryDTO(story, klass));
     }
@@ -27,11 +36,6 @@ public class SectionDTO {
         stories.add(new StoryDTO(story, method));
       }
     }
-    return stories;
-  }
-
-  public String title() {
-    return Utils.splitCamelCase(klass.getSimpleName());
   }
 
 }

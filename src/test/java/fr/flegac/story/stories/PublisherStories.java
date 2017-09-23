@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import fr.flegac.story.Story;
 import fr.flegac.story.publisher.Publisher;
-import fr.flegac.story.publisher.generator.index.IndexDTO;
+import fr.flegac.story.publisher.model.IndexDTO;
 
 @Story(why = "publish user stories from source code",
        who = "publisher",

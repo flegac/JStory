@@ -1,47 +1,61 @@
 package fr.flegac.story.publisher;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
-import fr.flegac.story.publisher.generator.index.IndexDTO;
-import fr.flegac.story.publisher.generator.index.IndexGenerator;
-import fr.flegac.story.publisher.generator.section.SectionGenerator;
-import fr.flegac.story.publisher.generator.story.StoryGenerator;
+import java.util.HashMap;
+import java.util.Map;
+import fr.flegac.story.publisher.model.IndexDTO;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateExceptionHandler;
 
 /**
- * Publisher load a full template directory and then allow to generate a full documentation in an output directory.
+ * Publisher load a full templatePath directory and then allow to generate a full documentation in an output directory.
  *
  */
 public class Publisher {
+  private static final String TEMPLATE_OUTPUT_FOLDER = "output";
 
-  private final Path template;
+  private static final String TEMPLATE_ENTRY_POINT = "index.ftlh";
 
-  public final IndexGenerator indexGenerator;
-  public final SectionGenerator sectionGenerator;
-  public final StoryGenerator storyGenerator;
+  private final Configuration cfg;
+  private final Path templateOutput;
+  private final Template template;
 
-  public Publisher(final Path template) {
+  public Publisher(final Path templatePath) throws IOException {
     super();
-    this.template = template;
+    this.templateOutput = templatePath.resolve(TEMPLATE_OUTPUT_FOLDER);
 
-    final String indexTemplate = Utils.convertPathToString(template.resolve("index.html"));
-    final String sectionTemplate = Utils.convertPathToString(template.resolve("section.html"));
-    final String storyTemplate = Utils.convertPathToString(template.resolve("story.html"));
-
-    storyGenerator = new StoryGenerator(this, storyTemplate);
-    sectionGenerator = new SectionGenerator(this, sectionTemplate);
-    indexGenerator = new IndexGenerator(this, indexTemplate);
+    cfg = new Configuration(Configuration.VERSION_2_3_25);
+    cfg.setDirectoryForTemplateLoading(templatePath.toFile());
+    cfg.setDefaultEncoding("UTF-8");
+    cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+    cfg.setLogTemplateExceptions(false);
+    template = cfg.getTemplate(TEMPLATE_ENTRY_POINT);
   }
 
   public void generate(final IndexDTO input, final Path target) {
-    final Path output = target.resolve("output");
-    Utils.copyFolder(template.resolve("output"), output);
+    final Path outputPath = target.resolve(TEMPLATE_OUTPUT_FOLDER);
 
-    try (PrintWriter out = new PrintWriter(output.resolve("index.html").toFile());) {
-      out.println(indexGenerator.generate(input));
-    } catch (final FileNotFoundException e) {
+    // copy resources from template to the publication
+    Utils.copyFolder(templateOutput, outputPath);
+
+    // create publication index.html
+    final Path outputIndexPath = outputPath.resolve("index.html");
+    try (PrintWriter out = new PrintWriter(outputIndexPath.toFile());) {
+      template.process(computeParameters(input), out);
+    } catch (final TemplateException | IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private Map computeParameters(final IndexDTO input) {
+    final Map parameters = new HashMap();
+    parameters.put("title", input.title);
+    parameters.put("sections", input.sections);
+    return parameters;
   }
 
 }
