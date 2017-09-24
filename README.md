@@ -1,5 +1,5 @@
 # JStory
-An @Annotation based User Story &amp; Specifications generation framework
+An annotation based User Story &amp; Specifications generation framework
 The goal is to put your specifications as close as possible to the code.
 
 The @Story anotation defines a User Story in the (why, who, what) format.
@@ -14,15 +14,14 @@ The developper should first create (JUnit) classes :
 - Test classes should have a nice functionnal name since the class name is used to generate documentation titles.
 
 # Usage
-Build with mvn install, then run PubliserTest.java as a JUnit test.
+Build with mvn install, then run PubliserStories.java as a JUnit test.
 
 This will build a documentation website covering the JStory project itself.
-
-Note: You (maybe) need to configure the input/target folder in PublisherTest.java.
+The output is by default in the target directory of your project in eclipse.
 
 # Things to do
-- Give a way (optional?) to index stories according to some external, client relative specifications id.
-- Give a way to represent non automated tests for further generation (user interface test for exemple).
+- Give a way (optional?) to index stories according to some external specifications id.
+- Give a way to represent non automated tests and generate test plan from them (user interface test for exemple).
 
 # Exemple ( generated from JStory source code)
 
