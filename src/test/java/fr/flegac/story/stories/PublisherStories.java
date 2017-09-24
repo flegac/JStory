@@ -16,7 +16,8 @@ import fr.flegac.story.publisher.model.IndexDTO;
        what = "add multiple @Story annotation on the same test class,"
            + "this allow for closely related user stories to be tested all at once")
 public class PublisherStories {
-  private static Path WORKSPACE = Paths.get("C:\\Users\\Flo\\git\\JStory");
+
+  private static Path WORKSPACE = Paths.get(System.getProperty("user.dir"));
 
   @Test
   @Story(why = "test multiple stories with a single JUnit test",
