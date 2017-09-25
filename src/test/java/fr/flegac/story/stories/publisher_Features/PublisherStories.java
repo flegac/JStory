@@ -1,20 +1,17 @@
-package fr.flegac.story.stories.publisherFeatures;
+package fr.flegac.story.stories.publisher_Features;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import fr.flegac.story.Epic;
 import fr.flegac.story.Story;
 import fr.flegac.story.publisher.Publisher;
 import fr.flegac.story.publisher.model.PageDTO;
 
-@Story(why = "publish user stories from source code",
-       who = "publisher",
-       what = "run a publishing program and generate all stories defined in functional test classes")
-@Story(why = "use a single class to test multiple user stories",
-       who = "developper",
-       what = "add multiple @Story annotation on the same test class,"
-           + "this allow for closely related user stories to be tested all at once")
+@Epic(why = "publish user stories from source code",
+      who = "publisher",
+      what = "run a publishing program and generate all stories defined in functional test classes")
 public class PublisherStories {
 
   private static Path WORKSPACE = Paths.get(System.getProperty("user.dir"));

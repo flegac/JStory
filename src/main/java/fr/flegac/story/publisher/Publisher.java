@@ -16,6 +16,8 @@ import freemarker.template.TemplateExceptionHandler;
  *
  */
 public class Publisher {
+  private static final String OUTPUT_INDEX = "index.html";
+
   private static final String TEMPLATE_OUTPUT_FOLDER = "output";
 
   private static final String TEMPLATE_ENTRY_POINT = "index.ftlh";
@@ -43,7 +45,7 @@ public class Publisher {
     Utils.copyFolder(templateOutput, outputPath);
 
     // create publication index.html
-    final Path outputIndexPath = outputPath.resolve("index.html");
+    final Path outputIndexPath = outputPath.resolve(OUTPUT_INDEX);
     try (PrintWriter out = new PrintWriter(outputIndexPath.toFile());) {
       template.process(computeParameters(input), out);
     } catch (final TemplateException | IOException e) {

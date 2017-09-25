@@ -1,22 +1,43 @@
 package fr.flegac.story.publisher.model;
 
 import java.lang.reflect.Method;
+import fr.flegac.story.Epic;
 import fr.flegac.story.Story;
 
 public class StoryDTO {
-  public Story story;
+  private final String who;
+  private final String what;
+  private final String why;
   public String test;
 
-  public StoryDTO(final Story story, final Class<?> testClass) {
-    super();
-    this.story = story;
-    this.test = testClass.getSimpleName() + ".class";
+  public StoryDTO(final Epic epic, final Class<?> testClass) {
+    this(epic.why(), epic.who(), epic.what(), testClass.getSimpleName() + ".class");
   }
 
   public StoryDTO(final Story story, final Method testMethod) {
+    this(story, testMethod.getDeclaringClass().getSimpleName() + "." + testMethod.getName() + "()");
+  }
+
+  private StoryDTO(final Story story, final String test) {
+    this(story.why(), story.who(), story.what(), test);
+  }
+
+  private StoryDTO(final String why, final String who, final String what, final String test) {
     super();
-    this.story = story;
-    this.test = testMethod.getDeclaringClass().getSimpleName() + "." + testMethod.getName() + "()";
+    if (why.trim().isEmpty()) {
+      throw new RuntimeException("story.why is empty : " + test);
+    }
+    if (who.trim().isEmpty()) {
+      throw new RuntimeException("story.who is empty : " + test);
+    }
+    if (what.trim().isEmpty()) {
+      throw new RuntimeException("story.what is empty : " + test);
+    }
+
+    this.why = why;
+    this.who = who;
+    this.what = what;
+    this.test = test;
   }
 
   public String getTest() {
@@ -24,14 +45,14 @@ public class StoryDTO {
   }
 
   public String getWhat() {
-    return story.what();
+    return what;
   }
 
   public String getWho() {
-    return story.who();
+    return who;
   }
 
   public String getWhy() {
-    return story.why();
+    return why;
   }
 }

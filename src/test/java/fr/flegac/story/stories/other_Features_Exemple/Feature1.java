@@ -1,4 +1,4 @@
-package fr.flegac.story.stories.otherFeaturesExemple;
+package fr.flegac.story.stories.other_Features_Exemple;
 
 import fr.flegac.story.Story;
 import fr.flegac.story.TestScenario;

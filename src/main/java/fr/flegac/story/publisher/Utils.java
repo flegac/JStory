@@ -5,17 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 public class Utils {
-  public static String capitalize(final String s) {
-    if (s.length() == 0) {
-      return s;
-    }
-    if (s.length() == 1) {
-      return s.toUpperCase();
-    }
-
-    return s.substring(0, 1).toUpperCase() + s.substring(1);
-  }
-
   public static void copyFolder(final Path src, final Path dest) {
     try {
       Files.walk(src)
@@ -45,5 +34,9 @@ public class Utils {
             "(?<=[^A-Z])(?=[A-Z])",
             "(?<=[A-Za-z])(?=[^A-Za-z])"),
         " ");
+  }
+
+  public static String splitUnderscore(final String s) {
+    return String.join(" ", s.split("_"));
   }
 }

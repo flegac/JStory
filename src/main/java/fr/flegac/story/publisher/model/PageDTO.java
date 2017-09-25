@@ -48,9 +48,8 @@ public class PageDTO {
         .filter(c -> c.getPackageName().startsWith(packageroot + "."))
         .map(ClassPath.ClassInfo::load)
         .forEach(c -> {
-          final String title = Utils.capitalize(Utils.splitCamelCase(c.getSimpleName()));
           for (final TestScenario test : c.getAnnotationsByType(TestScenario.class)) {
-            tests.add(new TestDTO(title, test));
+            tests.add(new TestDTO(Utils.splitCamelCase(c.getSimpleName()), test));
           }
         });
 
@@ -62,9 +61,8 @@ public class PageDTO {
         })
         .flatMap(methods -> Arrays.asList(methods).stream())
         .forEach(m -> {
-          final String t = Utils.capitalize(Utils.splitCamelCase(m.getName()));
           for (final TestScenario test : m.getAnnotationsByType(TestScenario.class)) {
-            tests.add(new TestDTO(t, test));
+            tests.add(new TestDTO(Utils.splitCamelCase(m.getName()), test));
           }
         });
 

@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Repeatable(Stories.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({
-  ElementType.TYPE, ElementType.METHOD
+  ElementType.METHOD
 })
 public @interface Story {
   String what();

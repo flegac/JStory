@@ -1,9 +1,34 @@
+
+body  {
+	position: relative;
+}
+
+.active {
+	border-bottom: 1px solid Red;
+}
+
+.chapter {
+margin-left: 0px;
+}
+
+.section {
+margin-left: .5cm;
+}
+
 .story {
     margin-bottom: .5cm;
     border: 1px solid gray;
     width: 20cm;
     padding: .25cm .1cm .5cm .5cm;
-    margin-left: 1cm;
+    margin-left: .5cm;
+}
+
+.epics  .story {
+ border: 1px solid Red;
+}
+
+.epics .story::before {
+content: "[EPIC]";
 }
 
 .why::after, .who::after {

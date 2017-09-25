@@ -1,11 +1,11 @@
 package fr.flegac.story.publisher.model;
 
-import static fr.flegac.story.publisher.Utils.capitalize;
 import static fr.flegac.story.publisher.Utils.splitCamelCase;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import com.google.common.reflect.ClassPath;
+import fr.flegac.story.publisher.Utils;
 
 public class ChapterDTO {
 
@@ -41,7 +41,7 @@ public class ChapterDTO {
 
   private String computeTitle(final String packageRoot) {
     final String[] split = packageRoot.split("\\.");
-    return capitalize(splitCamelCase(split[split.length - 1]));
+    return splitCamelCase(Utils.splitUnderscore(split[split.length - 1]));
   }
 
 }
