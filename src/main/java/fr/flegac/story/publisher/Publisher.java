@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import fr.flegac.story.publisher.model.IndexDTO;
+import fr.flegac.story.publisher.model.PageDTO;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -36,7 +36,7 @@ public class Publisher {
     template = cfg.getTemplate(TEMPLATE_ENTRY_POINT);
   }
 
-  public void generate(final IndexDTO input, final Path target) {
+  public void generate(final PageDTO input, final Path target) {
     final Path outputPath = target.resolve(TEMPLATE_OUTPUT_FOLDER);
 
     // copy resources from template to the publication
@@ -51,10 +51,9 @@ public class Publisher {
     }
   }
 
-  private Map computeParameters(final IndexDTO input) {
+  private Map computeParameters(final PageDTO page) {
     final Map parameters = new HashMap();
-    parameters.put("title", input.title);
-    parameters.put("sections", input.sections);
+    parameters.put("page", page);
     return parameters;
   }
 
