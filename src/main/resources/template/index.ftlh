@@ -6,29 +6,12 @@
 		<link rel="stylesheet" type="text/css" href="style/style.css" >
 	</head>
 
-	<body data-spy="scroll" data-target="#my-navbar" data-offset="0">
+	<body data-spy="scroll" data-target="#page-of-content" >
 
-		  <#assign x = 0>
-		  <nav id="my-navbar" class="navbar navbar-light bg-light sticky-top float-right flex-column" >
-			<#list page.chapters as chapter>
-	 			<a class="nav-link" style="margin-left: 0cm" href="#chapter-${chapter?counter}">Chapter ${chapter?counter}</a>
-				<#list chapter.sections as section>
-					<a class="nav-link" style="margin-left: 1cm" href="#section-${chapter?counter}-${section?counter}">Section ${chapter?counter}.${section?counter}</a>
-					<#list section.epics as story>
-						<#assign x++ >
-			 			<a class="nav-link" style="margin-left: 1.5cm" href="#story-${x}">Story ${x}</a>
-					</#list>
-					<#list section.stories as story>
-						<#assign x++ >
-			  			<a class="nav-link" style="margin-left: 1.5cm" href="#story-${x}">Story ${x}</a>
-					</#list>
-				</#list>
-			</#list>
-		  </nav>
-
+		<#include "pageOfContents.ftlh" />
 
 		<#assign x = 0>
-		<h1>${page.title}</h1>
+		<h1 data-offset="0">${page.title}</h1>
 		<#list page.chapters as chapter>
 			<div class='chapter' id='chapter-${chapter?counter}'>
 				<h2>Chapter ${chapter?index+1} - ${chapter.title?capitalize}</h2>
@@ -48,10 +31,59 @@
 			</div>
 		</#list>
 
-		<h1>Cahier de tests</h1>
-		<#list page.tests as test>
-			<#include "test.ftlh" />
-		</#list>
+		<#include "test.ftlh" />
+
+
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
 
 	
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
