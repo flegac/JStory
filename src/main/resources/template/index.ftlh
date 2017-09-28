@@ -6,33 +6,45 @@
 		<link rel="stylesheet" type="text/css" href="style/style.css" >
 	</head>
 
-	<body data-spy="scroll" data-target="#page-of-content" >
+	<body data-spy="scroll" data-target="#table-of-contents" >
 
-		<#include "pageOfContents.ftlh" />
+		<#include "tableOfContents.ftlh" />
 
-		<#assign x = 0>
-		<h1 data-offset="0">${page.title}</h1>
-		<#list page.chapters as chapter>
-			<div class='chapter' id='chapter-${chapter?counter}'>
-				<h2>Chapter ${chapter?index+1} - ${chapter.title?capitalize}</h2>
-				<#list chapter.sections as section>
-					<div class='section' id="section-${chapter?counter}-${section?counter}">
-						<h3>Section ${chapter?index+1}.${section?index+1} - ${section.title?capitalize}</h3>
-						<div class='epics'>
-							<#list section.epics as story>
-								<#include "story.ftlh" />
+		<div class="container">
+			<h1 data-offset="0">${page.title}</h1>
+			
+			<#assign x = 0>
+			<#list page.chapters as chapter>
+				<div class='chapter' id='chapter-${chapter?counter}'>
+					<h2>${chapter?index+1}. ${chapter.title?capitalize}</h2>
+					<#list chapter.sections as section>
+					
+						<div class='section' id="section-${chapter?counter}-${section?counter}">
+							<h3>${chapter?index+1}.${section?index+1}. ${section.title?capitalize}</h3>
+							<#list section.subSections as subSection>
+		
+								<div class='subsection' id="subsection-${chapter?counter}-${section?counter}-${subSection?counter}">
+									<h4>${chapter?index+1}.${section?index+1}.${subSection?index+1}. ${subSection.title?capitalize}</h4>
+									<div class='epics'>
+										<#list subSection.epics as story>
+											<#include "story.ftlh" />
+										</#list>
+									</div>
+									<#list subSection.stories as story>
+										<#include "story.ftlh" />
+									</#list>
+									<#list subSection.tests as test>
+										<#include "test.ftlh" />
+									</#list>								
+								</div>
 							</#list>
 						</div>
-						<#list section.stories as story>
-							<#include "story.ftlh" />
-						</#list>
-					</div>
-				</#list>
-			</div>
-		</#list>
-
-		<#include "test.ftlh" />
-
+						
+					</#list>
+				</div>
+		
+			</#list>
+		</div>
 
 <pre>
 

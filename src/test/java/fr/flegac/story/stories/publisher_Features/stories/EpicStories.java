@@ -1,4 +1,4 @@
-package fr.flegac.story.stories.publisher_Features;
+package fr.flegac.story.stories.publisher_Features.stories;
 
 import fr.flegac.story.Epic;
 import fr.flegac.story.Story;

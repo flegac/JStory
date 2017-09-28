@@ -1,4 +1,4 @@
-package fr.flegac.story.stories.other_Features_Exemple;
+package fr.flegac.story.stories.other_Features_Exemple.administrator;
 
 import fr.flegac.story.Epic;
 import fr.flegac.story.TestScenario;

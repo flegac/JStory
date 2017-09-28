@@ -4,42 +4,47 @@ body  {
 }
 
 .active {
-	border-bottom: 1px solid Red;
+	border: 1px solid gray;
+}
+
+.section, .subsection , .story, .scenario {
+	margin-left: .5cm;
+	margin-top: .5cm;
 }
 
 .chapter {
-margin-left: 0px;
+	margin-top: 1cm;
 }
 
 .section {
-margin-left: .5cm;
 }
 
-.story {
-    margin-bottom: .5cm;
-    border: 1px solid gray;
+.subSection {
+}
+
+.story, .scenario {
     width: 20cm;
-    padding: .25cm .1cm .5cm .5cm;
-    margin-left: .5cm;
+}
+
+.scenario {
+}
+.story {
 }
 
 .epics  .story {
- border: 1px solid Red;
+	border-color: red
 }
 
-.epics .story::before {
-content: "[EPIC]";
-}
-
-.why::after, .who::after {
- content:","
- }
-.what::after {
- content:"."
- }
 .who, .what {
     margin-left: .5cm;
 }
-.test {
-   float: right;
+
+#table-of-contents .chapter, #table-of-contents .section, #table-of-contents .subsection , #table-of-contents .story, #table-of-contents .scenario {
+	margin: .0cm;
+	margin-left: .5cm;
+	width: auto;
+}
+
+.nav-link {
+	padding: 0;
 }
