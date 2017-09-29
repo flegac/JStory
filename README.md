@@ -1,48 +1,82 @@
 # JStory
-An annotation based User Story &amp; Specifications generation framework
-The goal is to put your specifications as close as possible to the code.
+JStory allows to :
+- annotate Java code with user stories and test scenario,
+- generate specifications as a web site from the annotated code.
 
-The @Story anotation defines a User Story in the (why, who, what) format.
-The generators then build html documentation from the source code.
+# Motivations
+Short : https://en.wikipedia.org/wiki/Behavior-driven_development
 
-The framework is designed to promote functionnal tests before starting to develop new features.
-The developper should first create (JUnit) classes :
-- @Story defined on a method should be entirely tested in the method.
-- @Story needing many method to test should be defined on the class instead.
-- Each @Story MUST be defined in only one place (don't repeat yourself)
-- Many different @Story can be defined on the same class or method (if strongly connected for exemple)
-- Test classes should have a nice functionnal name since the class name is used to generate documentation titles.
+Lose of business focus is a recurring problem in many teams.
+I think it often comes from misunderstandings between business and developper teams and lack of acceptance criteria definition before development.
 
-# Usage
-Build with mvn install, then run PubliserStories.java as a JUnit test.
+With this project I want to reach the following goals :
+- define a workflow that helps developpers to think about how to test a feature before starting any developement,
+- decrease misunderstandings between business and developpers
+- link deeply the business specification, its acceptance criteria and its implementation,
+- generate an up-to-date specification directly from source code.
 
-This will build a documentation website covering the JStory project itself.
-The output is by default in the target directory of your project in eclipse.
+# Workflow
+The original idea behind JStory is to follow this simple process :
+- The business team comunicates the required feature to the developper (any media is ok)
+- (Optional if already user stories) The specifications is rewritten as a list of independant user stories
+- The developper maps each user story to a @Story annotation. The annotation has to be in a JUnit test class.
+- The developper fill the test class with automatic tests or @TestScenario annotations.
+This ensures that any user story will be covered in the next developement phase and that the developper knows how to test it.
+- The business team read the generated specifications and check that its is correct.
+- The developper is ready to implement the feature using TDD (optional).
+
+# Recommendations
+- Unit/technical tests should be separated from business tests because they do not have the same purpose and life cycle.
+- Stories defined on a method should be entirely tested in the method.
+- Stories needing many methods to be tested should be defined on a class with the @Epic annotation.
+- Each @Story MUST be defined in a single place (don't repeat yourself)
+
+# Specifications
+The generated specifications is organised as this (work in progress) :
+- Chapter     -> first level package : the name is generated from the package name
+- Section     -> second level package : idem
+- Subsection  -> class : the name is generated from the class name
+- Epic        -> @Epic annotation over a class (at most one per Subsection)
+- Story       -> @Story annotation over a method (any number)
+- Test        -> @TestScenario annotation over a method : title is generated from the method name
+
+The resulting code should directly reflect the specification organisation (by feature).
+
+# Usage (publication)
+To publish the specifications from the source code look at PublisherStories.java.
+Specifications can be generated from a jar file or directly from the running application.
+
+To test the generation :
+- clone the JStory project
+- run mvn clean install
+- open the index.html generated in the target/output folder
 
 # Things to do
-- Give a way (optional?) to index stories according to some external specifications id.
-- Give a way to represent non automated tests and generate test plan from them (user interface test for exemple).
+- Give a way (optional?) to index stories according to some external specifications id,
+- Link each story to its coresponding test scenari (or automatic testing class),
+- Publish generated specifications as word (docx) documents.
 
 # Exemple ( generated from JStory source code)
 
-Section : Publisher Stories
+1. Publisher Features
+1.1. Publisher
+1.1.1. Publisher Stories
 
-In order to publish user stories from source code,
-As a publisher,
+In order to publish user stories from source code
+As a publisher
 I want to run a publishing program and generate all stories defined in functional test classes.
-(tested with: PublisherStories.class) 
 
-In order to use a single class to test multiple user stories,
-As a developper,
-I want to add multiple @Story annotation on the same test class,this allow for closely related user stories to be tested all at once.
-(tested with: PublisherStories.class) 
+In order to generate specifications from jar file
+As a developper
+I want to parse a given jar file containing java code with specifications and genrate a web site wfrom it.
 
-In order to test multiple stories with a single JUnit test,
-As a developper,
-I want to assign multiple @Story annotations to a single test method.
-(tested with: PublisherStories.publish()) 
+In order to generate specifications from source code
+As a developper
+I want to parse source code containing specifications and generate a web site from it.
 
-In order to verify that 2 @Story annotations can be on the same test method,
-As a developper,
-I want to assign multiple @Story annotations to a single test method.
-(tested with: PublisherStories.publish())
+1.2. Epics
+1.2.1. Epic Stories
+
+In order to define epic stories
+As a developper
+I want to associate @Epic to classes.
