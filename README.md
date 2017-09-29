@@ -57,26 +57,8 @@ To test the generation :
 - Publish generated specifications as word (docx) documents.
 
 # Exemple ( generated from JStory source code)
+The following archive contains the html page generated from the JStory source code :
+https://github.com/flegac/JStory/blob/master/src/main/resources/generated.zip
 
-1. Publisher Features
-1.1. Publisher
-1.1.1. Publisher Stories
 
-In order to publish user stories from source code
-As a publisher
-I want to run a publishing program and generate all stories defined in functional test classes.
 
-In order to generate specifications from jar file
-As a developper
-I want to parse a given jar file containing java code with specifications and genrate a web site wfrom it.
-
-In order to generate specifications from source code
-As a developper
-I want to parse source code containing specifications and generate a web site from it.
-
-1.2. Epics
-1.2.1. Epic Stories
-
-In order to define epic stories
-As a developper
-I want to associate @Epic to classes.
