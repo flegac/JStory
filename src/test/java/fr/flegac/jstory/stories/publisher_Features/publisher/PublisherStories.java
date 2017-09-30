@@ -5,8 +5,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import fr.flegac.jstory.Epic;
-import fr.flegac.jstory.Story;
+import fr.flegac.jstory.annotations.Epic;
+import fr.flegac.jstory.annotations.Step;
+import fr.flegac.jstory.annotations.Story;
 import fr.flegac.jstory.parser.CodeStoryParser;
 import fr.flegac.jstory.parser.JarStoryParser;
 import fr.flegac.jstory.parser.StoryParser;
@@ -27,6 +28,18 @@ public class PublisherStories {
   private static final Path JAR_PATH = WORKSPACE.resolve("src/test/java/jstory-doc-0.0.1-SNAPSHOT.jar");
   private static final String INDEX_HTML = "index.html";
   private static final String STORIES_PACKAGE = "fr.flegac.jstory.stories";
+
+  @Story(why = "link stories to test scenario",
+         who = "publisher",
+         what = "link each story and each test scenario to the class or method where it is defined")
+  @Step(given = "A jar file with code annoted by JStory",
+        when = "Run the publication process",
+        then = "the documentation has been generated")
+  @Step(when = "Navigate the generated documentation to find a story",
+        then = "the story is associated to a test scenario")
+  public void eachStoryShouldBeLinkedToASpecificJavaClassOrMethod() {
+
+  }
 
   @Test
   @Story(why = "generate specifications from source code",

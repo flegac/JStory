@@ -24,15 +24,20 @@
 									<#list subSection.epics as story>
 										<#assign x++ >
 							 			<a class="story nav-link" href="#item-${x}">Story ${x}</a>
+										<#list story.tests as test>
+											<#assign x++ >
+								  			<a class="scenario nav-link" href="#item-${x}">Test ${x}</a>
+										</#list>							 			
 									</#list>
 									<#list subSection.stories as story>
 										<#assign x++ >
 							  			<a class="story nav-link" href="#item-${x}">Story ${x}</a>
+										<#list story.tests as test>
+											<#assign x++ >
+								  			<a class="scenario nav-link" href="#item-${x}">Test ${x}</a>
+										</#list>							  			
 									</#list>
-									<#list subSection.tests as test>
-										<#assign x++ >
-							  			<a class="scenario nav-link" href="#item-${x}">Test ${x}</a>
-									</#list>
+
 								</div>
 							</#list>
 						</div>

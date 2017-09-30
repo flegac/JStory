@@ -7,7 +7,7 @@ public class SubSectionDTO {
   private final String title;
   private final List<StoryDTO> epics = new LinkedList<>();
   private final List<StoryDTO> stories = new LinkedList<>();
-  private final List<TestDTO> tests = new LinkedList<>();
+  private final List<ScenarioDTO> tests = new LinkedList<>();
 
   public SubSectionDTO(final String title) {
     super();
@@ -22,7 +22,7 @@ public class SubSectionDTO {
     return stories;
   }
 
-  public List<TestDTO> getTests() {
+  public List<ScenarioDTO> getTests() {
     return tests;
   }
 

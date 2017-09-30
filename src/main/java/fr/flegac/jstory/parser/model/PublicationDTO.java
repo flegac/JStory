@@ -6,7 +6,7 @@ import java.util.List;
 public class PublicationDTO {
   private final String title;
   private final List<ChapterDTO> chapters = new LinkedList<>();
-  private final List<TestDTO> tests = new LinkedList<>();
+  private final List<ScenarioDTO> tests = new LinkedList<>();
 
   public PublicationDTO(final String title) {
     super();
@@ -17,7 +17,7 @@ public class PublicationDTO {
     return chapters;
   }
 
-  public List<TestDTO> getTests() {
+  public List<ScenarioDTO> getTests() {
     return tests;
   }
 

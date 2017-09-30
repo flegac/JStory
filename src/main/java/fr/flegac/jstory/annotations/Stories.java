@@ -1,4 +1,4 @@
-package fr.flegac.jstory;
+package fr.flegac.jstory.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,13 +7,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({
-  ElementType.TYPE
+  ElementType.METHOD
 })
-public @interface Epic {
-  String what();
-
-  String who();
-
-  String why();
-
+public @interface Stories {
+  Story[] value();
 }

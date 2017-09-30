@@ -12,3 +12,7 @@
     <a href="#" class="card-link">Another link</a>
   </div>
 </div>
+
+<#list story.tests as test>
+	<#include "test.ftlh" />
+</#list>	

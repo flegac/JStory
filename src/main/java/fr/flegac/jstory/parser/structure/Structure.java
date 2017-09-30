@@ -3,10 +3,10 @@ package fr.flegac.jstory.parser.structure;
 import static fr.flegac.jstory.utils.Utils.clean;
 import fr.flegac.jstory.parser.model.ChapterDTO;
 import fr.flegac.jstory.parser.model.PublicationDTO;
+import fr.flegac.jstory.parser.model.ScenarioDTO;
 import fr.flegac.jstory.parser.model.SectionDTO;
 import fr.flegac.jstory.parser.model.StoryDTO;
 import fr.flegac.jstory.parser.model.SubSectionDTO;
-import fr.flegac.jstory.parser.model.TestDTO;
 
 public class Structure {
   private final Node root;
@@ -56,13 +56,21 @@ public class Structure {
     final SubSectionDTO result = new SubSectionDTO(title);
     for (final StoryDTO epic : node.getEpics()) {
       result.getEpics().add(epic);
+      for (final ScenarioDTO test : node.getTests()) {
+        epic.getTests().add(test);
+      }
     }
-    for (final StoryDTO story : node.getStories()) {
-      result.getStories().add(story);
+
+    for (final Node child : node.getChildren().values()) {
+      for (final StoryDTO story : child.getStories()) {
+        result.getStories().add(story);
+        for (final ScenarioDTO test : child.getTests()) {
+          story.getTests().add(test);
+        }
+      }
+
     }
-    for (final TestDTO test : node.getTests()) {
-      result.getTests().add(test);
-    }
+
     return result;
   }
 }

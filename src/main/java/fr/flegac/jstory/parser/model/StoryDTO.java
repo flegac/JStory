@@ -2,15 +2,14 @@ package fr.flegac.jstory.parser.model;
 
 import java.util.LinkedList;
 import java.util.List;
-import fr.flegac.jstory.Epic;
-import fr.flegac.jstory.Story;
+import fr.flegac.jstory.annotations.Epic;
+import fr.flegac.jstory.annotations.Story;
 
 public class StoryDTO {
   private final String who;
   private final String what;
   private final String why;
-
-  private final List<TestDTO> tests = new LinkedList<>();
+  private final List<ScenarioDTO> tests = new LinkedList<>();
 
   public StoryDTO(final Epic epic) {
     this(epic.who(), epic.what(), epic.why());
@@ -37,11 +36,7 @@ public class StoryDTO {
     this.why = why;
   }
 
-  public String getTest() {
-    return "--no test supported--";
-  }
-
-  public List<TestDTO> getTests() {
+  public List<ScenarioDTO> getTests() {
     return tests;
   }
 

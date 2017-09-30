@@ -5,12 +5,12 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import fr.flegac.jstory.Epic;
-import fr.flegac.jstory.Story;
-import fr.flegac.jstory.TestScenario;
+import fr.flegac.jstory.annotations.Epic;
+import fr.flegac.jstory.annotations.Scenario;
+import fr.flegac.jstory.annotations.Story;
 import fr.flegac.jstory.parser.model.PublicationDTO;
+import fr.flegac.jstory.parser.model.ScenarioDTO;
 import fr.flegac.jstory.parser.model.StoryDTO;
-import fr.flegac.jstory.parser.model.TestDTO;
 import fr.flegac.jstory.parser.structure.Node;
 import fr.flegac.jstory.parser.structure.Structure;
 
@@ -31,13 +31,22 @@ public class AbstractParser implements StoryParser {
 
   protected Node computeStructure(final Node root, final Set<Class<?>> classes) {
     for (final Class<?> c : classes) {
-      System.out.println(c.getName());
       final Node classNode = root.addPath(c.getName());
-      classNode.setEpics(computeEpics(c));
-      classNode.setStories(computeStories(c));
-      classNode.setTests(computeTests(c));
+      fillClassNode(c, classNode);
     }
     return root;
+  }
+
+  protected void fillClassNode(final Class<?> c, final Node classNode) {
+    System.out.println(c.getName());
+    classNode.setEpics(computeEpics(c));
+    classNode.setTests(computeTests(c));
+
+    for (final Method method : c.getDeclaredMethods()) {
+      final Node node = classNode.addChild(clean(method.getName()));
+      node.setStories(computeStories(method));
+      node.setTests(computeTests(method));
+    }
   }
 
   private List<StoryDTO> computeEpics(final Class<?> klass) {
@@ -48,37 +57,31 @@ public class AbstractParser implements StoryParser {
     return epics;
   }
 
-  private List<StoryDTO> computeStories(final Class<?> klass) {
+  private List<StoryDTO> computeStories(final Method method) {
     final List<StoryDTO> stories = new LinkedList<>();
-    for (final Method method : klass.getDeclaredMethods()) {
-      for (final Story story : method.getAnnotationsByType(Story.class)) {
-        stories.add(new StoryDTO(story));
-      }
+    for (final Story story : method.getAnnotationsByType(Story.class)) {
+      stories.add(new StoryDTO(story));
     }
     return stories;
   }
 
-  private List<TestDTO> computeTests(final Class<?> klass) {
-    final List<TestDTO> tests = new LinkedList<>();
-
-    for (final TestScenario test : klass.getAnnotationsByType(TestScenario.class)) {
-      tests.add(new TestDTO(clean(klass.getSimpleName()), test));
-    }
-
-    for (final Method method : klass.getDeclaredMethods()) {
-      tests.addAll(computeTests(method));
-    }
-
-    return tests;
+  private List<ScenarioDTO> computeTests(final Class<?> klass) {
+    final String title = clean(klass.getSimpleName());
+    final Scenario[] scenarios = klass.getAnnotationsByType(Scenario.class);
+    return computeTests(title, scenarios);
   }
 
-  private List<TestDTO> computeTests(final Method method) {
-    final List<TestDTO> tests = new LinkedList<>();
+  private List<ScenarioDTO> computeTests(final Method method) {
+    final String title = clean(method.getName());
+    final Scenario[] scenarios = method.getAnnotationsByType(Scenario.class);
+    return computeTests(title, scenarios);
+  }
 
-    for (final TestScenario test : method.getAnnotationsByType(TestScenario.class)) {
-      tests.add(new TestDTO(clean(method.getName()), test));
+  private List<ScenarioDTO> computeTests(final String title, final Scenario[] scenarios) {
+    final List<ScenarioDTO> tests = new LinkedList<>();
+    for (final Scenario scenario : scenarios) {
+      tests.add(new ScenarioDTO(title, scenario));
     }
-
     return tests;
   }
 

@@ -1,7 +1,7 @@
 package fr.flegac.jstory.stories.publisher_Features.epics;
 
-import fr.flegac.jstory.Epic;
-import fr.flegac.jstory.Story;
+import fr.flegac.jstory.annotations.Epic;
+import fr.flegac.jstory.annotations.Story;
 
 @Epic(why = "define epic stories",
       who = "developper",

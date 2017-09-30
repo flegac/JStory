@@ -4,10 +4,30 @@
 			    <b>${test.title?capitalize}</b>
 			  </div>
 			  <div class="card-body">
-				<ol class="card-text">
+
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th>#</th>
+				      <th>Given</th>
+				      <th>When</th>
+				      <th>Then</th>
+				    </tr>
+				  </thead>
+				  <tbody>
 					<#list test.steps as step>
-						<li>${step}</li>
-					</#list>
-				</ol>
+				    <tr>
+				      <th scope="row">${step?counter}</th>
+				      <td>${step.given}</td>
+				      <td>${step.when}</td>
+				      <td>${step.then}</td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>	
+
 			  </div>
 			</div>
+			
+			
+		
