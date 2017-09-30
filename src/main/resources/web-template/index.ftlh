@@ -27,15 +27,13 @@
 									<h4>${chapter?index+1}.${section?index+1}.${subSection?index+1}. ${subSection.title?capitalize}</h4>
 									<div class='epics'>
 										<#list subSection.epics as story>
-											<#include "story.ftlh" />
+											<#include "story.ftlh" />											
 										</#list>
 									</div>
 									<#list subSection.stories as story>
 										<#include "story.ftlh" />
 									</#list>
-									<#list subSection.tests as test>
-										<#include "test.ftlh" />
-									</#list>								
+							
 								</div>
 							</#list>
 						</div>

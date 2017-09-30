@@ -6,7 +6,6 @@ import fr.flegac.jstory.parser.model.PublicationDTO;
 import fr.flegac.jstory.parser.model.SectionDTO;
 import fr.flegac.jstory.parser.model.StoryDTO;
 import fr.flegac.jstory.parser.model.SubSectionDTO;
-import fr.flegac.jstory.parser.model.TestDTO;
 
 public class Structure {
   private final Node root;
@@ -57,12 +56,14 @@ public class Structure {
     for (final StoryDTO epic : node.getEpics()) {
       result.getEpics().add(epic);
     }
-    for (final StoryDTO story : node.getStories()) {
-      result.getStories().add(story);
+
+    for (final Node child : node.getChildren().values()) {
+      for (final StoryDTO story : child.getStories()) {
+        result.getStories().add(story);
+      }
+
     }
-    for (final TestDTO test : node.getTests()) {
-      result.getTests().add(test);
-    }
+
     return result;
   }
 }
