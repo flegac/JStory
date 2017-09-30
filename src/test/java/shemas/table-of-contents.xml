@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<publication>
+	<chapter title="LE Titre du premier chapitre">
+		<section title="LE titre de la première section du premier chapitre">
+			<subsection title="LE titre de la première section">
+				<source>my.package.path.MyJavaClassName" </source>
+				<source>my.package.path.MyJavaClassName" </source>
+			</subsection>
+		</section>
+	</chapter>
+</publication>

@@ -20,12 +20,12 @@ public class CodeStoryParser extends AbstractParser {
     }
   }
 
-  public CodeStoryParser(final String packageRoot) {
-    super(packageRoot, getAllClasses(packageRoot, new ClassLoader() {}));
+  public CodeStoryParser(final String title, final String packageRoot) {
+    super(title, packageRoot, getAllClasses(packageRoot, new ClassLoader() {}));
   }
 
-  public CodeStoryParser(final String packageRoot, final ClassLoader classLoader) {
-    super(packageRoot, getAllClasses(packageRoot, classLoader));
+  public CodeStoryParser(final String title, final String packageRoot, final ClassLoader classLoader) {
+    super(title, packageRoot, getAllClasses(packageRoot, classLoader));
   }
 
 }

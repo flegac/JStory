@@ -66,5 +66,28 @@
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
+
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>jaxb2-maven-plugin</artifactId>
+
+					<executions>
+						<execution>
+							<goals>
+								<goal>xjc</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<schemaDirectory>src/test/java/schemas/</schemaDirectory>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
 	</build>
+
 </project>

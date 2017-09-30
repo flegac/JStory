@@ -16,16 +16,18 @@ import fr.flegac.jstory.parser.structure.Structure;
 
 public class AbstractParser implements StoryParser {
   private final Structure structure;
+  private final String title;
 
-  public AbstractParser(final String packageRoot, final Set<Class<?>> classes) {
+  public AbstractParser(final String title, final String packageRoot, final Set<Class<?>> classes) {
     super();
+    this.title = title;
     final Node root = new Node(packageRoot);
     computeStructure(root, classes);
     structure = new Structure(root);
   }
 
   @Override
-  public PublicationDTO getPublication(final String title) {
+  public PublicationDTO getPublication() {
     return structure.getPublication(title);
   }
 
@@ -68,21 +70,19 @@ public class AbstractParser implements StoryParser {
   }
 
   private List<ScenarioDTO> computeTests(final Class<?> klass) {
-    final String title = clean(klass.getSimpleName());
     final Scenario[] scenarios = klass.getAnnotationsByType(Scenario.class);
-    return computeTests(title, scenarios);
+    return computeTests(clean(klass.getSimpleName()), scenarios);
   }
 
   private List<ScenarioDTO> computeTests(final Method method) {
-    final String title = clean(method.getName());
     final Scenario[] scenarios = method.getAnnotationsByType(Scenario.class);
-    return computeTests(title, scenarios);
+    return computeTests(clean(method.getName()), scenarios);
   }
 
-  private List<ScenarioDTO> computeTests(final String title, final Scenario[] scenarios) {
+  private List<ScenarioDTO> computeTests(final String scenarioTitle, final Scenario[] scenarios) {
     final List<ScenarioDTO> tests = new LinkedList<>();
     for (final Scenario scenario : scenarios) {
-      tests.add(new ScenarioDTO(title, scenario));
+      tests.add(new ScenarioDTO(scenarioTitle, scenario));
     }
     return tests;
   }

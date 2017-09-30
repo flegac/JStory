@@ -1,5 +1,6 @@
 package fr.flegac.jstory.parser;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -17,11 +18,12 @@ import java.util.jar.JarFile;
 public class JarStoryParser extends AbstractParser {
   private static final String CLASS_EXTENSION = ".class";
 
-  private static Set<Class<?>> computeClasses(final String pathToJar) {
+  private static Set<Class<?>> computeClasses(final File pathToJar) {
     final Set<Class<?>> result = new HashSet<>();
 
     try (final JarFile jarFile = new JarFile(pathToJar);
-        final URLClassLoader cl = URLClassLoader.newInstance(new URL[] { new URL("jar:file:" + pathToJar + "!/") });) {
+        final URLClassLoader cl = URLClassLoader
+            .newInstance(new URL[] { new URL("jar:file:" + pathToJar.getAbsolutePath() + "!/") });) {
 
       final Enumeration<JarEntry> entries = jarFile.entries();
 
@@ -42,8 +44,8 @@ public class JarStoryParser extends AbstractParser {
     }
   }
 
-  public JarStoryParser(final String packageRoot, final Path pathToJar) {
-    super(packageRoot, computeClasses(pathToJar.toAbsolutePath().toString()));
+  public JarStoryParser(final String title, final String packageRoot, final Path pathToJar) {
+    super(title, packageRoot, computeClasses(pathToJar.toAbsolutePath().toFile()));
   }
 
 }

@@ -2,39 +2,24 @@ package fr.flegac.jstory.parser.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import fr.flegac.jstory.annotations.Scenario;
 import fr.flegac.jstory.annotations.Step;
 
+@XmlRootElement(name = "scenario")
 public class ScenarioDTO {
 
-  public static class StepDTO {
-    private final String given;
-    private final String when;
-    private final String then;
+  @XmlAttribute
+  private String title;
 
-    public StepDTO(final Step step) {
-      super();
-      this.given = step.given();
-      this.when = step.when();
-      this.then = step.then();
-    }
-
-    public String getGiven() {
-      return given;
-    }
-
-    public String getThen() {
-      return then;
-    }
-
-    public String getWhen() {
-      return when;
-    }
-
-  }
-
-  private final String title;
+  @XmlElement(name = "step")
   private final List<StepDTO> steps = new LinkedList<>();
+
+  public ScenarioDTO() {
+    super();
+  }
 
   public ScenarioDTO(final String title, final Scenario scenario) {
     super();
@@ -51,4 +36,5 @@ public class ScenarioDTO {
   public String getTitle() {
     return title;
   }
+
 }

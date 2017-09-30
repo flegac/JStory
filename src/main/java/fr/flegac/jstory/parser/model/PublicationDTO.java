@@ -2,11 +2,20 @@ package fr.flegac.jstory.parser.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "publication")
 public class PublicationDTO {
-  private final String title;
+  @XmlAttribute
+  private String title;
+  @XmlElement(name = "chapter")
   private final List<ChapterDTO> chapters = new LinkedList<>();
-  private final List<ScenarioDTO> tests = new LinkedList<>();
+
+  public PublicationDTO() {
+    super();
+  }
 
   public PublicationDTO(final String title) {
     super();
@@ -15,10 +24,6 @@ public class PublicationDTO {
 
   public List<ChapterDTO> getChapters() {
     return chapters;
-  }
-
-  public List<ScenarioDTO> getTests() {
-    return tests;
   }
 
   public String getTitle() {

@@ -8,6 +8,7 @@ import fr.flegac.jstory.parser.model.StoryDTO;
 import fr.flegac.jstory.parser.model.SubSectionDTO;
 
 public class Structure {
+
   private final Node root;
 
   public Structure(final Node root) {
@@ -38,6 +39,7 @@ public class Structure {
     for (final Node child : node.getChildren().values()) {
       result.getChapters().add(chapter(child));
     }
+
     return result;
   }
 
