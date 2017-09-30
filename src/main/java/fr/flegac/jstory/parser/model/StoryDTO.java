@@ -10,16 +10,17 @@ public class StoryDTO {
   private final String what;
   private final String why;
   private final List<ScenarioDTO> tests = new LinkedList<>();
+  private String sourceCode;
 
-  public StoryDTO(final Epic epic) {
-    this(epic.who(), epic.what(), epic.why());
+  public StoryDTO(final Epic epic, final List<ScenarioDTO> tests) {
+    this(epic.who(), epic.what(), epic.why(), tests);
   }
 
-  public StoryDTO(final Story story) {
-    this(story.who(), story.what(), story.why());
+  public StoryDTO(final Story story, final List<ScenarioDTO> tests) {
+    this(story.who(), story.what(), story.why(), tests);
   }
 
-  public StoryDTO(final String who, final String what, final String why) {
+  private StoryDTO(final String who, final String what, final String why, final List<ScenarioDTO> tests) {
     super();
     if (why.trim().isEmpty()) {
       throw new RuntimeException("story.why is empty : " + why);
@@ -34,6 +35,11 @@ public class StoryDTO {
     this.who = who;
     this.what = what;
     this.why = why;
+    this.tests.addAll(tests);
+  }
+
+  public String getSourceCode() {
+    return sourceCode;
   }
 
   public List<ScenarioDTO> getTests() {
@@ -50,5 +56,9 @@ public class StoryDTO {
 
   public String getWhy() {
     return why;
+  }
+
+  public void setSourceCode(final String sourceCode) {
+    this.sourceCode = sourceCode;
   }
 }

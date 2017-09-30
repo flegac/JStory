@@ -1,4 +1,4 @@
-package fr.flegac.jstory.stories.publisher_Features.publisher;
+package fr.flegac.jstory.stories.publication.web_site;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,10 +15,10 @@ import fr.flegac.jstory.parser.model.PublicationDTO;
 import fr.flegac.jstory.publisher.web.WebPublisher;
 import fr.flegac.jstory.publisher.web.WebTemplate;
 
-@Epic(why = "publish user stories from source code",
+@Epic(why = "publish structured specifications from source code",
       who = "publisher",
-      what = "run a publishing program and generate all stories defined in functional test classes")
-public class PublisherStories {
+      what = "run a programm and get a structured web site containing all specifications")
+public class WebSitePublication {
 
   private static final Path WORKSPACE = Paths.get(System.getProperty("user.dir"));
   private static final Path WEB_TEMPLATE = WORKSPACE.resolve("src/main/resources/web-template");

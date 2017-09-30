@@ -4,10 +4,10 @@
 
 			<div class="btn-group" data-toggle="buttons">
 			  <label class="btn btn-primary">
-			    <input type="checkbox" onchange="$('.story').toggle();"> story
+			    <input type="checkbox" onchange="$('.story').toggle();return false;"> story
 			  </label>
 			  <label class="btn btn-primary">
-			    <input type="checkbox" onchange="$('.scenario').toggle();"> test
+			    <input type="checkbox" onchange="$('.scenario').toggle();return false;"> test
 			  </label>
 			</div>
 
@@ -23,21 +23,18 @@
 									<a class="nav-link" href="#subsection-${chapter?counter}-${section?counter}-${subSection?counter}">${chapter?counter}.${section?counter}.${subSection?counter}. ${subSection.title?capitalize}</a>
 									<#list subSection.epics as story>
 										<#assign x++ >
-							 			<a class="story nav-link" href="#item-${x}">Story ${x}</a>
+							 			<a class="story nav-link" href="#story-${x}">Story ${x}</a>
 										<#list story.tests as test>
-											<#assign x++ >
-								  			<a class="scenario nav-link" href="#item-${x}">Test ${x}</a>
+								  			<a class="scenario nav-link" href="#scenario-${x}">Test ${x}</a>
 										</#list>							 			
 									</#list>
 									<#list subSection.stories as story>
 										<#assign x++ >
-							  			<a class="story nav-link" href="#item-${x}">Story ${x}</a>
+							  			<a class="story nav-link" href="#story-${x}">Story ${x}</a>
 										<#list story.tests as test>
-											<#assign x++ >
-								  			<a class="scenario nav-link" href="#item-${x}">Test ${x}</a>
+								  			<a class="scenario nav-link" href="#scenario-${x}">Test ${x}</a>
 										</#list>							  			
 									</#list>
-
 								</div>
 							</#list>
 						</div>

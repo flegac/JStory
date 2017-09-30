@@ -40,19 +40,19 @@ public class AbstractParser implements StoryParser {
   protected void fillClassNode(final Class<?> c, final Node classNode) {
     System.out.println(c.getName());
     classNode.setEpics(computeEpics(c));
-    classNode.setTests(computeTests(c));
 
     for (final Method method : c.getDeclaredMethods()) {
-      final Node node = classNode.addChild(clean(method.getName()));
+      final Node node = classNode.addChild(method.getName());
       node.setStories(computeStories(method));
-      node.setTests(computeTests(method));
     }
   }
 
   private List<StoryDTO> computeEpics(final Class<?> klass) {
     final List<StoryDTO> epics = new LinkedList<>();
-    for (final Epic epic : klass.getAnnotationsByType(Epic.class)) {
-      epics.add(new StoryDTO(epic));
+    for (final Epic story : klass.getAnnotationsByType(Epic.class)) {
+      final StoryDTO storyDTO = new StoryDTO(story, computeTests(klass));
+      storyDTO.setSourceCode(klass.getCanonicalName());
+      epics.add(storyDTO);
     }
     return epics;
   }
@@ -60,7 +60,9 @@ public class AbstractParser implements StoryParser {
   private List<StoryDTO> computeStories(final Method method) {
     final List<StoryDTO> stories = new LinkedList<>();
     for (final Story story : method.getAnnotationsByType(Story.class)) {
-      stories.add(new StoryDTO(story));
+      final StoryDTO storyDTO = new StoryDTO(story, computeTests(method));
+      storyDTO.setSourceCode(method.getDeclaringClass().getSimpleName() + "." + method.getName() + "()");
+      stories.add(storyDTO);
     }
     return stories;
   }

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import fr.flegac.jstory.parser.model.ScenarioDTO;
 import fr.flegac.jstory.parser.model.StoryDTO;
 
 public class Node {
@@ -14,7 +13,6 @@ public class Node {
 
   private List<StoryDTO> stories = new LinkedList<>();
   private List<StoryDTO> epics = new LinkedList<>();
-  private List<ScenarioDTO> tests = new LinkedList<>();
 
   public Node(final String name) {
     super();
@@ -68,20 +66,12 @@ public class Node {
     return stories;
   }
 
-  public List<ScenarioDTO> getTests() {
-    return tests;
-  }
-
   public void setEpics(final List<StoryDTO> epics) {
     this.epics = epics;
   }
 
   public void setStories(final List<StoryDTO> stories) {
     this.stories = stories;
-  }
-
-  public void setTests(final List<ScenarioDTO> tests) {
-    this.tests = tests;
   }
 
   @Override

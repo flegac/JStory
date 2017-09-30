@@ -1,5 +1,4 @@
-			<#assign x++>
-			<div class="card scenario" id="item-${x}">
+			<div class="card scenario" id="scenario-${x}">
 			  <div class="card-header">
 			    <b>${test.title?capitalize}</b>
 			  </div>
@@ -29,5 +28,3 @@
 			  </div>
 			</div>
 			
-			
-		
